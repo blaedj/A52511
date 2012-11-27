@@ -5,33 +5,43 @@
 package Puzzle;
 
 import framework.State;
-
+import graph.SimpleVertex;
 /**
  *
  * @author Blaed Johnston
  */
-public class PuzzleState implements State{
+public class PuzzleState extends SimpleVertex implements State{
+
+    @Override
+    public String toString() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 
     public enum SQUARE {
         ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, BLANK}
     
     SQUARE board[][];
     
-    public PuzzleState(){
+    public PuzzleState(String name){
+        super(name);
         board = new SQUARE[3][3];
         initialize();
     }
     
+    /**
+     * Initializes the state of the board to match the required initial state
+     * May need to be changed for vaious initial states.
+     */
     private void initialize(){
-        board[0][0] = SQUARE.ONE;
-        board[0][1] = SQUARE.TWO;
+        board[0][0] = SQUARE.TWO;
+        board[0][1] = SQUARE.EIGHT;
         board[0][2] = SQUARE.THREE;
-        board[1][0] = SQUARE.FOUR;
-        board[1][1] = SQUARE.FIVE;
-        board[1][2] = SQUARE.SIX;
+        board[1][0] = SQUARE.ONE;
+        board[1][1] = SQUARE.SIX;
+        board[1][2] = SQUARE.FOUR;
         board[2][0] = SQUARE.SEVEN;
-        board[2][1] = SQUARE.EIGHT;
-        board[2][2] = SQUARE.BLANK;
+        board[2][1] = SQUARE.BLANK;
+        board[2][2] = SQUARE.FIVE;
     }
     
     @Override
@@ -39,7 +49,10 @@ public class PuzzleState implements State{
         if(this == other){
             return true;
         }
-        else if(other.getClass() != this.getClass()){
+        if(other == null){
+            return false;
+        }
+        if(other.getClass() != this.getClass()){
             return false;
         }
         else{
@@ -65,5 +78,4 @@ public class PuzzleState implements State{
     public SQUARE[][] getBoard(){
         return board;
     }
-    
 }//end PuzzleState
