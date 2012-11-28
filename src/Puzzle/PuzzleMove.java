@@ -1,7 +1,4 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Puzzle;
 import framework.Move;
 import framework.State;
@@ -28,33 +25,43 @@ public class PuzzleMove extends Move{
             if(!moveName.equals(i.toString() + "Up")||!moveName.equals(i.toString() + "Down")
                     ||!moveName.equals(i.toString() + "Left")
                     ||!moveName.equals(i.toString() + "Right")){
-               System.out.println("Invalid moveName. Internal Error."); 
+                System.out.println("Invalid moveName. Internal Error.");
             }
         }
     }
-
+    
     @Override
     public State doMove(State otherState) {
-        //need to decide how to figure out what move is to be made.
+
         PuzzleState state = (PuzzleState) otherState;
+
+        String name = getMoveName();
+        int tileValueInt = name.charAt(0);//the int equiv of the value of the tile to be moves
+        String direction = name.substring(1);//the direction that the tile is to be moved
+        SQUARE tileVal = SQUARE.fromInt(tileValueInt);//the actual value of the tile to be moved
+        int posCurrent = state.getLocation(tileVal);//the location on the board of the tile to be moved
+        int posMove = getDirectedPos(direction, posCurrent);//the index of the desired final tile location
+        int blankLoc = state.getLocation(SQUARE.BLANK);//the location of the BLANK tile
         if(state.getLocation(SQUARE.BLANK) == 0 || !isValidMove(posCurrent, posMove)){
             return null;
         }
         
+        /**
+         * @TODO finish move validation and implement swap blank
+         */
+        state.setTile(blankLoc, tileVal);
+        state.setTile(curP, tileVal);
         return null;
     }
     
     
     /** @TODO need to decide how to implement move, what private members etc*/
     
-    //find the square to the right, up, down or left
-    
-    
-    /**Takes in two int values and determines if they are adjacent on the board
+       /**Takes in two int values and determines if they are adjacent on the board
      * @param a, b the positions on the board to be tested
      * @return returns true if the two are adjacent, false if they are not.
      *  __ __ __
-     * | 1  2  3|pp
+     * | 1  2  3|
      * | 4  5  6|
      * |_7 _8 _9|
      *
@@ -87,10 +94,33 @@ public class PuzzleMove extends Move{
         return false;
     }
     
+    
+    /** Decides which get(direction)Pos to call and calls if
+     * @param direction the direction of the value being queried for
+     * @param curPos the location of the starting tile
+     * @return the location of the tile to the right, left, up or down of the tile,
+     * returns 0 as an error message.
+     */
+    private int getDirectedPos(String direction, int curPos){
+        switch(direction){
+            case("Right"):
+                return getRight(curPos);
+            case("Left"):
+                return getLeft(curPos);
+            case("Up"):
+                return getAbove(curPos);
+            case("Down"):
+                return getBelow(curPos);
+            default:
+                return 0;
+        }
+    }
+    
+    
     /** gets the index of the tile to the right of the current tile.
      * @param curPos the tile whose neighbor is being queried for
      * @return the index of the tile to the right of curPos, or zero if DNE*/
-    private int getRightPos(int curPos){
+    private int getRight(int curPos){
         if(curPos == 3 || curPos == 6 || curPos == 9){
             return 0;
         }
@@ -133,6 +163,11 @@ public class PuzzleMove extends Move{
         else{
             return(curPos + 3);
         }
+        
+    }
+    
+    private void swapBlank(int curPos, int movePos, SQUARE curVal){
+        
         
     }
     

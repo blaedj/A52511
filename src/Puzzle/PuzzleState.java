@@ -11,7 +11,7 @@ import graph.SimpleVertex;
  * @author Blaed Johnston
  */
 public class PuzzleState extends SimpleVertex implements State{
-
+    private boolean debug = false;
     @Override
     public String toString() {
         throw new UnsupportedOperationException("Not supported yet.");
@@ -23,10 +23,24 @@ public class PuzzleState extends SimpleVertex implements State{
      * | 4  5  6|  __
      * |_7 _8 _9| |_0| zero is not on the board...
    */ 
-    public PuzzleState(String name){
+    
+    /**
+     * Constructs a new PuzzleState. 
+     * @param name: the name of the state
+     * @param a: an array of SQUARES 
+     * @pre a is of size 10, and a[0] == null.
+     */
+    public PuzzleState(String name, SQUARE a[]){
         super(name);
-        board = new SQUARE[10];
-        initialize();
+        //do a deep copy of a into board.
+        for(int i=0; i < 9; i++){
+            board[i] = a[i];
+        }
+        if(debug){
+            if(a[0] != null)
+                System.out.println("a[0] not null error");
+        }
+
     }
     
     /**
@@ -34,6 +48,7 @@ public class PuzzleState extends SimpleVertex implements State{
      * May need to be changed for various initial states.
      */
     private void initialize(){
+        board[0] = null;
         board[1] = SQUARE.TWO;
         board[2] = SQUARE.EIGHT;
         board[3] = SQUARE.THREE;
@@ -44,6 +59,23 @@ public class PuzzleState extends SimpleVertex implements State{
         board[8] = SQUARE.BLANK;
         board[9] = SQUARE.FIVE;
     }
+
+    
+    /** Setter for any index of board 
+     * @param tileLoc the index of the board that is to be changed, must be between 1-9, inclusive.
+     * @param val the value to be set
+     *@return true if the index was successfully changed, false if tileLoc is outside the acceptable range
+     * 
+     */
+    public boolean setTile(int tileLoc, SQUARE val){
+        if(tileLoc < 1 || tileLoc > 9){
+            return false;
+        }
+        else{
+            board[tileLoc] = val;
+            return true;
+        }        
+    }//end setTile
     
     @Override
     public boolean equals(Object other){
