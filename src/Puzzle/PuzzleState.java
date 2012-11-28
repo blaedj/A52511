@@ -16,32 +16,33 @@ public class PuzzleState extends SimpleVertex implements State{
     public String toString() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
-
-    public enum SQUARE {
-        ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, BLANK}
     
-    SQUARE board[][];
-    
+    SQUARE board[];
+/** the board Layout:
+     * | 1  2  3|
+     * | 4  5  6|  __
+     * |_7 _8 _9| |_0| zero is not on the board...
+   */ 
     public PuzzleState(String name){
         super(name);
-        board = new SQUARE[3][3];
+        board = new SQUARE[10];
         initialize();
     }
     
     /**
      * Initializes the state of the board to match the required initial state
-     * May need to be changed for vaious initial states.
+     * May need to be changed for various initial states.
      */
     private void initialize(){
-        board[0][0] = SQUARE.TWO;
-        board[0][1] = SQUARE.EIGHT;
-        board[0][2] = SQUARE.THREE;
-        board[1][0] = SQUARE.ONE;
-        board[1][1] = SQUARE.SIX;
-        board[1][2] = SQUARE.FOUR;
-        board[2][0] = SQUARE.SEVEN;
-        board[2][1] = SQUARE.BLANK;
-        board[2][2] = SQUARE.FIVE;
+        board[1] = SQUARE.TWO;
+        board[2] = SQUARE.EIGHT;
+        board[3] = SQUARE.THREE;
+        board[4] = SQUARE.ONE;
+        board[5] = SQUARE.SIX;
+        board[6] = SQUARE.FOUR;
+        board[7] = SQUARE.SEVEN;
+        board[8] = SQUARE.BLANK;
+        board[9] = SQUARE.FIVE;
     }
     
     @Override
@@ -57,13 +58,9 @@ public class PuzzleState extends SimpleVertex implements State{
         }
         else{
             PuzzleState anOther = (PuzzleState) other;
-            
-            for(int i = 0; i < 3; i++){
-                for(int j =0; j < 3; j++){
-                    if(this.board[i][j] != anOther.getBoard()[i][j]){
-                        return false;
-                    }
-                }//end nested for
+            for(int i = 0; i < 9; i++){
+                if(this.board[i] != anOther.getBoard()[i]){
+                    return false;}
             }//end ouside for()
             return true;
         }
@@ -75,7 +72,7 @@ public class PuzzleState extends SimpleVertex implements State{
         return hash;
     }
     
-    public SQUARE[][] getBoard(){
+    public SQUARE[] getBoard(){
         return board;
     }
 }//end PuzzleState
