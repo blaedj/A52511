@@ -36,7 +36,7 @@ public PuzzleMove(String moveName){
      * @param a, b the positions on the board to be tested
      * @return returns true if the two are adjacent, false if they are not.
      *  __ __ __
-     * | 1  2  3|
+     * | 1  2  3|pp
      * | 4  5  6|
      * |_7 _8 _9|
      * 
@@ -93,8 +93,33 @@ public PuzzleMove(String moveName){
         }
     }
     
+    /** gets the index of the tile above the current tile, if possible.
+     * @param curPos the tile whose neighbor is being queried for
+     * @return the index of the tile above curPos, or zero if DNE*/
+    private int getAbove(int curPos){
+        if(curPos == 1 || curPos == 2 || curPos == 3){
+            return 0;
+        }
+        else{
+            return(curPos - 3);
+        }
+    }
+    
+    /** gets the index of the tile below the current tile, if possible.
+     * @param curPos the tile whose neighbor is being queried for
+     * @return the index of the tile below curPos, or zero if DNE*/
+    private int getBelow(int curPos){
+        if(curPos == 7 || curPos ==8 || curPos == 9){
+            return 0;
+        }
+        else{
+            return(curPos + 3);
+        }
+
+    }
+    
     private boolean isValidMove(int posCurrent, int posMove){
-        if(adjacent(posCurrent, posMove) && )
+        if(adjacent(posCurrent, posMove)  )
             return true;
         else
         return false;

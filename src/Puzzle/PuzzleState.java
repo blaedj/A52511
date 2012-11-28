@@ -75,4 +75,16 @@ public class PuzzleState extends SimpleVertex implements State{
     public SQUARE[] getBoard(){
         return board;
     }
+    
+    
+    public int getLocation(SQUARE s){
+        int one = 0;
+        
+        for (int i = 1; i < 9; i++) {
+            if(board[i] == s){
+                return i;
+            }
+        }
+        return 0;
+    }
 }//end PuzzleState
