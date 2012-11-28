@@ -11,22 +11,40 @@ import framework.State;
  * @author blaed
  */
 public class PuzzleMove extends Move{
-
-public PuzzleMove(String moveName){
-    super(moveName);
     
-}
-    
-    @Override
-    public State doMove(State otherState) {
-        PuzzleState state = (PuzzleState) otherState;
-        if(state.getLocation(SQUARE.BLANK) == 0 || !isValidMove(posCurrent, posMove));
-        return null;
-        
-        
+    /** Constructs a new PuzzleMove Object.
+     * @param moveName the name of the move to be constructed. It is an error if the move name is not one of the following:
+     * 1Left
+     * 1Right
+     * 1Up
+     * 1Down...
+     * .
+     * .
+     * .and so on for 1, 2, 3, 4, 5, 6, 7, 8*/
+    public PuzzleMove(String moveName){
+        super(moveName);
+        Integer i;
+        for(i=1; i<9; i++){
+            if(!moveName.equals(i.toString() + "Up")||!moveName.equals(i.toString() + "Down")
+                    ||!moveName.equals(i.toString() + "Left")
+                    ||!moveName.equals(i.toString() + "Right")){
+               System.out.println("Invalid moveName. Internal Error."); 
+            }
+        }
     }
 
-
+    @Override
+    public State doMove(State otherState) {
+        //need to decide how to figure out what move is to be made.
+        PuzzleState state = (PuzzleState) otherState;
+        if(state.getLocation(SQUARE.BLANK) == 0 || !isValidMove(posCurrent, posMove)){
+            return null;
+        }
+        
+        return null;
+    }
+    
+    
     /** @TODO need to decide how to implement move, what private members etc*/
     
     //find the square to the right, up, down or left
@@ -39,7 +57,7 @@ public PuzzleMove(String moveName){
      * | 1  2  3|pp
      * | 4  5  6|
      * |_7 _8 _9|
-     * 
+     *
      */
     private boolean adjacent(int a, int b){
         if(a < 1 || a > 9||b<1||b>9){
@@ -65,7 +83,7 @@ public PuzzleMove(String moveName){
                 return(b==5||b==7||b==9);
             case(9):
                 return(b==6||b==8);
-       }
+        }
         return false;
     }
     
@@ -115,14 +133,14 @@ public PuzzleMove(String moveName){
         else{
             return(curPos + 3);
         }
-
+        
     }
     
     private boolean isValidMove(int posCurrent, int posMove){
         if(adjacent(posCurrent, posMove)  )
             return true;
         else
-        return false;
+            return false;
     }
-    
+
 }
