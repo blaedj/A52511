@@ -4,10 +4,17 @@
  */
 package Puzzle;
 
+import framework.Canvas;
+import framework.State;
 /**
  *
- * @author blaed
+ * @author Blaed Johnston
  */
-public class PuzzleCanvas {
+public class PuzzleCanvas extends Canvas {
+
+    public PuzzleCanvas(PuzzleState aState){
+        super(aState);
+        
+    }
     
 }

@@ -29,8 +29,7 @@ public static void main(String[] args) {
                                                    Position.WEST, 
                                                    Position.WEST,
                                                    0)));
-        //frame.add(new JLabel("Just testing"));//added
-    
+            
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
