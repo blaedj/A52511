@@ -11,7 +11,14 @@ import graph.SimpleVertex;
  * @author Blaed Johnston
  */
 public class PuzzleState extends SimpleVertex implements State{
+    
+    /** 
+     * De-bugging tool  
+     * 
+     */
     private boolean debug = false;
+    
+    
     @Override
     public String toString() {
         throw new UnsupportedOperationException("Not supported yet.");
@@ -41,6 +48,12 @@ public class PuzzleState extends SimpleVertex implements State{
                 System.out.println("a[0] not null error");
         }
 
+    }
+    
+    /** overloaded constructor to accept one arg, creates the standard 5-move puzzle*/
+    public PuzzleState(String name){
+        super(name);
+        initialize(board);
     }
     
    
@@ -88,6 +101,19 @@ public class PuzzleState extends SimpleVertex implements State{
         int hash = 5;
         return hash;
     }
+    
+    private void initialize(SQUARE a[]){
+            a[0] = null;
+            a[1] = SQUARE.TWO;
+            a[2] = SQUARE.EIGHT;
+            a[3] = SQUARE.THREE;
+            a[4] = SQUARE.ONE;
+            a[5] = SQUARE.SIX;
+            a[6] = SQUARE.FOUR;
+            a[7] = SQUARE.SEVEN;
+            a[8] = SQUARE.BLANK;
+            a[9] = SQUARE.FIVE;
+        }
     
     public SQUARE[] getBoard(){
         return board;
