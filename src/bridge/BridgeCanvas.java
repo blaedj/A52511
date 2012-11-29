@@ -46,8 +46,8 @@ public static void main(String[] args) {
          * need to create and store any objects to be 
          * drawn by paintComponent()          
          */
-        wide = 600;
-        height = 400;
+        wide = getPreferredWidth();
+        height = getPreferredHeight();
         setLayout(new FlowLayout());
         setBorder(BorderFactory.createLineBorder(Color.orange));
         setBounds(10, 10, (int) wide, (int) height);
@@ -90,7 +90,6 @@ public static void main(String[] args) {
         g2.fill(backdrop);
         g2.setColor(Color.blue);
         g2.fill(riv);
-        //g2.draw(riv);
         g2.setColor(new Color(120,67,7));
         g2.fill(bridge);
         g2.setColor(Color.red);
@@ -191,10 +190,7 @@ public static void main(String[] args) {
         return time.toString() + " Minutes";
     }
     
-    @Override
-    public Dimension getPreferredSize(){
-        return new Dimension((int) wide, (int) height);
-    }
+    
     
     /**The people and flashlight */
     private Shape p1, p2, p5, p10;

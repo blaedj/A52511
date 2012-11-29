@@ -1,5 +1,8 @@
 package framework.test;
 
+import Puzzle.PuzzleCanvas;
+import Puzzle.PuzzleProblem;
+import Puzzle.PuzzleState;
 import bridge.BridgeCanvas;
 import bridge.BridgeProblem;
 import bridge.BridgeState;
@@ -19,7 +22,7 @@ import waterjug.WaterJugState;
 public class TestFrame extends JFrame {
     
     public TestFrame() {
-        super("Testing Bridge and Water Jug Problems");
+        super("Testing Bridge, Water Jug, and 8-Puzzle Problems");
         ProblemPane problemPane = new ProblemPane();
         problemPane.add("Bridge", new GUI(new BridgeProblem(),new BridgeCanvas(new BridgeState(Position.WEST, 
                                                    Position.WEST, 
@@ -28,6 +31,9 @@ public class TestFrame extends JFrame {
                                                    Position.WEST,
                                                    0))));
         problemPane.add("Water Jug", new GUI(new WaterJugProblem(), new WaterJugCanvas(new WaterJugState(0, 0))));
+
+        problemPane.add("8-Puzzle", new GUI(new PuzzleProblem(), new PuzzleCanvas(new PuzzleState("initState"))));
+        
         add(problemPane);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         pack();

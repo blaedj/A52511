@@ -24,7 +24,7 @@ public class PuzzleState extends SimpleVertex implements State{
         throw new UnsupportedOperationException("Not supported yet.");
     }
     
-    SQUARE board[];
+    SQUARE[] board = new SQUARE[10];
 /** the board Layout:
      * | 1  2  3|
      * | 4  5  6|  __
@@ -88,7 +88,7 @@ public class PuzzleState extends SimpleVertex implements State{
         }
         else{
             PuzzleState anOther = (PuzzleState) other;
-            for(int i = 0; i < 9; i++){
+            for(int i = 1; i < 9; i++){
                 if(this.board[i] != anOther.getBoard()[i]){
                     return false;}
             }//end ouside for()
@@ -103,7 +103,6 @@ public class PuzzleState extends SimpleVertex implements State{
     }
     
     private void initialize(SQUARE a[]){
-            a[0] = null;
             a[1] = SQUARE.TWO;
             a[2] = SQUARE.EIGHT;
             a[3] = SQUARE.THREE;
@@ -121,8 +120,6 @@ public class PuzzleState extends SimpleVertex implements State{
     
     
     public int getLocation(SQUARE s){
-        int one = 0;
-        
         for (int i = 1; i < 9; i++) {
             if(board[i] == s){
                 return i;

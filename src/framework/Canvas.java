@@ -1,6 +1,7 @@
  
 package framework;
 
+import java.awt.Dimension;
 import java.awt.Graphics;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
@@ -12,6 +13,8 @@ import javax.swing.JLabel;
 public abstract class Canvas extends JComponent{
     private State state;
     private State prevState;
+    private double high = 400;
+    private double wide = 600;
     /**Creates a new canvas object
      * stores the first state object displayed
      * @param state state to be stored/displayed
@@ -20,9 +23,17 @@ public abstract class Canvas extends JComponent{
         this.state = state;
         prevState = state;
         setVisible(true);
-        
-
     }
+
+    public double getPreferredHeight(){
+    return high;
+    }
+    
+    public double getPreferredWidth(){
+    return wide;
+    }
+    
+    
     
     public State getState(){
         return state;
@@ -39,6 +50,11 @@ public abstract class Canvas extends JComponent{
     
     public void setPrevState(State aState){
         prevState = aState;
+    }
+
+    @Override
+    public Dimension getPreferredSize(){
+        return new Dimension((int) wide, (int) high);
     }
 
     protected void makeObjects(){

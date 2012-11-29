@@ -7,6 +7,7 @@ package Puzzle;
 import framework.Move;
 import framework.Problem;
 import java.util.ArrayList;
+import Puzzle.PuzzleMove;
 
 /**
  *
@@ -55,7 +56,6 @@ public class PuzzleProblem extends Problem{
          * May need to be changed for various initial states.
          */
         private void initialize(SQUARE a[]){
-            a[0] = null;
             a[1] = SQUARE.TWO;
             a[2] = SQUARE.EIGHT;
             a[3] = SQUARE.THREE;
