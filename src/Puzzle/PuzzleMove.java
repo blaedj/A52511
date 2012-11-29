@@ -42,16 +42,13 @@ public class PuzzleMove extends Move{
         int posCurrent = state.getLocation(tileVal);//the location on the board of the tile to be moved
         int posMove = getDirectedPos(direction, posCurrent);//the index of the desired final tile location
         int blankLoc = state.getLocation(SQUARE.BLANK);//the location of the BLANK tile
-        if(state.getLocation(SQUARE.BLANK) == 0 || !isValidMove(posCurrent, posMove)){
+        if(state.getLocation(SQUARE.BLANK) == 0 || !adjacent(posCurrent, posMove)){
             return null;
         }
         
-        /**
-         * @TODO finish move validation and implement swap blank
-         */
         state.setTile(blankLoc, tileVal);
-        state.setTile(curP, tileVal);
-        return null;
+        state.setTile(posCurrent, tileVal);
+        return state;
     }
     
     
@@ -169,13 +166,6 @@ public class PuzzleMove extends Move{
     private void swapBlank(int curPos, int movePos, SQUARE curVal){
         
         
-    }
-    
-    private boolean isValidMove(int posCurrent, int posMove){
-        if(adjacent(posCurrent, posMove)  )
-            return true;
-        else
-            return false;
     }
 
 }

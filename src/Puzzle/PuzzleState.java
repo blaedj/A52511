@@ -43,22 +43,7 @@ public class PuzzleState extends SimpleVertex implements State{
 
     }
     
-    /**
-     * Initializes the state of the board to match the required initial state
-     * May need to be changed for various initial states.
-     */
-    private void initialize(){
-        board[0] = null;
-        board[1] = SQUARE.TWO;
-        board[2] = SQUARE.EIGHT;
-        board[3] = SQUARE.THREE;
-        board[4] = SQUARE.ONE;
-        board[5] = SQUARE.SIX;
-        board[6] = SQUARE.FOUR;
-        board[7] = SQUARE.SEVEN;
-        board[8] = SQUARE.BLANK;
-        board[9] = SQUARE.FIVE;
-    }
+   
 
     
     /** Setter for any index of board 
