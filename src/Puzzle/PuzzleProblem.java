@@ -23,22 +23,22 @@ public class PuzzleProblem extends Problem{
         
         ArrayList<Move> moveList = new ArrayList<>();
         
-        Integer i = 1;
+        Integer i;
         String mvName;
-        PuzzleMove newMv; 
+
         for(i=1; i<9; i++){
             mvName = i.toString() + "Right";
-            newMv = new PuzzleMove(mvName);
-            moveList.add(newMv);
+            PuzzleMove newMv1 = new PuzzleMove(mvName);
+            moveList.add(newMv1);
             mvName = i.toString() + "Left";
-            newMv = new PuzzleMove(mvName);
-            moveList.add(newMv);
+            PuzzleMove newMv2 = new PuzzleMove(mvName);
+            moveList.add(newMv2);
             mvName = i.toString() + "Up";            
-            newMv = new PuzzleMove(mvName);
-            moveList.add(newMv);
+            PuzzleMove newMv3 = new PuzzleMove(mvName);
+            moveList.add(newMv2);
             mvName = i.toString() + "Down";            
-            newMv = new PuzzleMove(mvName);
-            moveList.add(newMv);
+            PuzzleMove newMv4 = new PuzzleMove(mvName);
+            moveList.add(newMv3);
         }
         setMoves(moveList);
         String introString = "Welcome to the 8-puzzle problem. Any tile can be moved to an adjacent blank tile./n"

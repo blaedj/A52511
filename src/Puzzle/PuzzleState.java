@@ -21,7 +21,10 @@ public class PuzzleState extends SimpleVertex implements State{
     
     @Override
     public String toString() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        String returnString ="| "+ this.board[1].toString() +"  "+ this.board[2].toString() +"  "+ this.board[3].toString() +"|\n"
+                + "| "+ this.board[4].toString() +" "+ this.board[5].toString() +"   "+ this.board[6].toString() +"|\n"
+                + "|_"+ this.board[7].toString() +" _"+ this.board[8].toString() +" _"+ this.board[9].toString() +"|\n";
+        return returnString;
     }
     
     SQUARE[] board = new SQUARE[10];
