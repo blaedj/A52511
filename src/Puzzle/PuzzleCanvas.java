@@ -31,9 +31,9 @@ public class PuzzleCanvas extends Canvas {
         super(aState);
         /**@TODO need to add and create any objects to be drawn*/
         String quickDraw =
-                  "| 1  2  3|\n"
-                + "| 8     4|\n"
-                + "|_7 _6 _5|\n"
+                  "| "+ aState.board[1] +"  "+ aState.board[2] +"  "+ aState.board[3] +"|\n"
+                + "| "+ aState.board[4] +" "+ aState.board[5] +"   "+ aState.board[6] +"|\n"
+                + "|_"+ aState.board[7] +" _"+ aState.board[8] +" _"+ aState.board[9] +"|\n";
         
         
     }
