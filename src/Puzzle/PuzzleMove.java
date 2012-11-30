@@ -11,21 +11,18 @@ public class PuzzleMove extends Move{
     
     /** Constructs a new PuzzleMove Object.
      * @param moveName the name of the move to be constructed. It is an error if the move name is not one of the following:
-     * 1Left
-     * 1Right
-     * 1Up
-     * 1Down...
-     * .
-     * .
-     * .and so on for 1, 2, 3, 4, 5, 6, 7, 8*/
+     * one, two, three, four, five, six, seven
+     * 
+     * */
     public PuzzleMove(String moveName){
         super(moveName);
         Integer i;
         for(i=1; i<9; i++){
-            if(!moveName.equals(i.toString() + "Up")||!moveName.equals(i.toString() + "Down")
-                    ||!moveName.equals(i.toString() + "Left")
-                    ||!moveName.equals(i.toString() + "Right")){
-                System.out.println("Invalid moveName. Internal Error.");
+            if(!moveName.equals("Tile1") || !moveName.equals("Tile")
+                    || !moveName.equals("three") || !moveName.equals("four")
+                    || !moveName.equals("five") || !moveName.equals("six")
+                    || !moveName.equals("seven") || !moveName.equals("eight")){
+            System.out.println("Internal error. Invalid move name" + moveName);
             }
         }
     }
@@ -40,12 +37,11 @@ public class PuzzleMove extends Move{
         String direction = name.substring(1);//the direction that the tile is to be moved
         SQUARE tileVal = SQUARE.fromInt(tileValueInt);//the actual value of the tile to be moved
         int posCurrent = state.getLocation(tileVal);//the location on the board of the tile to be moved
-        int posMove = getDirectedPos(direction, posCurrent);//the index of the desired final tile location
+
         int blankLoc = state.getLocation(SQUARE.BLANK);//the location of the BLANK tile
-        if(state.getLocation(SQUARE.BLANK) == 0 || !adjacent(posCurrent, posMove)){
-            return null;
-        }
-        
+	if(!adjacent(blankLoc, posCurrent)){
+		return null;
+	}
         state.setTile(blankLoc, tileVal);
         state.setTile(posCurrent, tileVal);
         return state;
@@ -54,7 +50,7 @@ public class PuzzleMove extends Move{
     
     /** @TODO need to decide how to implement move, what private members etc*/
     
-       /**Takes in two int values and determines if they are adjacent on the board
+    /**Takes in two int values and determines if they are adjacent on the board
      * @param a, b the positions on the board to be tested
      * @return returns true if the two are adjacent, false if they are not.
      *  __ __ __
@@ -90,7 +86,6 @@ public class PuzzleMove extends Move{
         }
         return false;
     }
-    
     
     /** Decides which get(direction)Pos to call and calls if
      * @param direction the direction of the value being queried for

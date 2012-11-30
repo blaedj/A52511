@@ -17,7 +17,7 @@ public class PuzzleState extends SimpleVertex implements State{
      * 
      */
     private boolean debug = false;
-    
+    SQUARE[] board = new SQUARE[10];    
     
     @Override
     public String toString() {
@@ -27,7 +27,7 @@ public class PuzzleState extends SimpleVertex implements State{
         return returnString;
     }
     
-    SQUARE[] board = new SQUARE[10];
+
 /** the board Layout:
      * | 1  2  3|
      * | 4  5  6|  __

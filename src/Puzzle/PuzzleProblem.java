@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package Puzzle;
 
 import framework.Move;
@@ -27,19 +23,10 @@ public class PuzzleProblem extends Problem{
         String mvName;
 
         for(i=1; i<9; i++){
-            mvName = i.toString() + "Right";
-            PuzzleMove newMv1 = new PuzzleMove(mvName);
-            moveList.add(newMv1);
-            mvName = i.toString() + "Left";
-            PuzzleMove newMv2 = new PuzzleMove(mvName);
-            moveList.add(newMv2);
-            mvName = i.toString() + "Up";            
-            PuzzleMove newMv3 = new PuzzleMove(mvName);
-            moveList.add(newMv2);
-            mvName = i.toString() + "Down";            
-            PuzzleMove newMv4 = new PuzzleMove(mvName);
-            moveList.add(newMv3);
+	    mvName = "tile"+i.toString();
+	    moveList.add(new PuzzleMove(mvName));
         }
+        System.out.println(moveList.size());
         setMoves(moveList);
         String introString = "Welcome to the 8-puzzle problem. Any tile can be moved to an adjacent blank tile./n"
                 + "Try to move the tiles into the final state shown below.\n"
