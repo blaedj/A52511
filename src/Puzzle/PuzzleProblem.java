@@ -35,11 +35,12 @@ public class PuzzleProblem extends Problem{
             moveList.add(newMv2);
             mvName = i.toString() + "Up";            
             PuzzleMove newMv3 = new PuzzleMove(mvName);
-            moveList.add(newMv2);
+            moveList.add(newMv3);
             mvName = i.toString() + "Down";            
             PuzzleMove newMv4 = new PuzzleMove(mvName);
-            moveList.add(newMv3);
+            moveList.add(newMv4);
         }
+        System.out.println(moveList.size());
         setMoves(moveList);
         String introString = "Welcome to the 8-puzzle problem. Any tile can be moved to an adjacent blank tile./n"
                 + "Try to move the tiles into the final state shown below.\n"

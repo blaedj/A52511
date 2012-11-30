@@ -25,7 +25,7 @@ public class PuzzleMove extends Move{
             if(!moveName.equals(i.toString() + "Up")||!moveName.equals(i.toString() + "Down")
                     ||!moveName.equals(i.toString() + "Left")
                     ||!moveName.equals(i.toString() + "Right")){
-                System.out.println("Invalid moveName. Internal Error.");
+                System.out.println("Invalid moveName. Internal Error." + moveName);
             }
         }
     }
