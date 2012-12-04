@@ -10,7 +10,7 @@ import javax.swing.JFrame;
 public class PuzzleGUI extends JFrame {
     
     public PuzzleGUI() {
-        add(new GUI(new PuzzleProblem(), new PuzzleCanvas(new PuzzleState("initPuzzle"))));
+        add(new GUI(new PuzzleProblem(new PuzzleState(2,8,3,1,6,4,7,0,5)), new PuzzleCanvas(new PuzzleState())));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         pack();
         setVisible(true);

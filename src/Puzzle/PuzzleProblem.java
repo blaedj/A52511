@@ -11,12 +11,15 @@ import Puzzle.PuzzleMove;
  */
 public class PuzzleProblem extends Problem{
     
-    public PuzzleProblem(){
+/**
+ * Constructs a new PuzzleProblem
+ * @param state the initial state of the PuzzleProblem
+ */
+    public PuzzleProblem(PuzzleState state){
+        //ArrayList<SQUARE> a = initialize();
+        //PuzzleState state = new PuzzleState();
 
-	ArrayList<SQUARE> a = initialize();
-        PuzzleState state = new PuzzleState("initialState", a);
-        setCurrentState(state);
-        
+        this.setCurrentState(state);
         ArrayList<Move> moveList = new ArrayList<>();
 
 	moveList.add(new PuzzleMove("Tile1"));
@@ -28,7 +31,6 @@ public class PuzzleProblem extends Problem{
 	moveList.add(new PuzzleMove("Tile7"));
 	moveList.add(new PuzzleMove("Tile8"));
 	
-        System.out.println(moveList.size());
         setMoves(moveList);
         String introString = "Welcome to the 8-puzzle problem. Any tile can be moved to an adjacent blank tile./n"
 	    + "Try to move the tiles into the final state shown below.\n"
@@ -36,7 +38,6 @@ public class PuzzleProblem extends Problem{
 	    + "| 8     4|\n"
 	    + "|_7 _6 _5|\n";
         setIntroduction(introString);
-    
     }
         
         
@@ -62,22 +63,12 @@ public class PuzzleProblem extends Problem{
         
     @Override
         public boolean success() {
-	PuzzleState curState = (PuzzleState) getCurrentState();
-	
-        ArrayList<SQUARE> finalBoard = new ArrayList<>();
-	finalBoard.add(SQUARE.EMPTY);
-	finalBoard.add(SQUARE.ONE);
-	finalBoard.add(SQUARE.TWO);
-	finalBoard.add(SQUARE.THREE);
-	finalBoard.add(SQUARE.EIGHT);
-	finalBoard.add(SQUARE.BLANK);
-	finalBoard.add(SQUARE.FOUR);
-	finalBoard.add(SQUARE.SEVEN);
-	finalBoard.add(SQUARE.SIX);
-	finalBoard.add(SQUARE.FIVE);
-	PuzzleState finalState = new PuzzleState("Final", finalBoard);
+//	PuzzleState curState = (PuzzleState) getCurrentState();
+
+	PuzzleState finalState = new PuzzleState(1,2,3,8,0,4,7,6,5);
                         
-	return curState.equals(finalState);
+	boolean retVal = getCurrentState().equals(finalState);
+        return retVal;
     }
 
 }

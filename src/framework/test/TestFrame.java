@@ -32,7 +32,7 @@ public class TestFrame extends JFrame {
                                                    0))));
         problemPane.add("Water Jug", new GUI(new WaterJugProblem(), new WaterJugCanvas(new WaterJugState(0, 0))));
 
-        problemPane.add("8-Puzzle", new GUI(new PuzzleProblem(), new PuzzleCanvas(new PuzzleState("initState"))));
+        problemPane.add("8-Puzzle", new GUI(new PuzzleProblem(new PuzzleState(2,8,3,1,6,4,7,0,5)), new PuzzleCanvas(new PuzzleState())));
         
         add(problemPane);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

@@ -72,7 +72,7 @@ public class PuzzleMove extends Move{
         if(!adjacent(blankLoc, posCurrent)){
             return null;
         }
-        state.setTile(blankLoc, tileVal);
+        state.setTile(blankLoc, tileVal);//sets the value of the blank tile(at index blankLoc) to value of the tile to move 
         state.setTile(posCurrent, tileVal);
         return state;
     }

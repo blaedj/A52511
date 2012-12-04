@@ -22,7 +22,7 @@ public class PuzzleCanvas extends Canvas {
     public static void main(String[] args){
         JFrame frame = new JFrame("BridgeCanvas Test");
         
-        frame.add(new PuzzleCanvas(new PuzzleState("initial")));
+        frame.add(new PuzzleCanvas(new PuzzleState()));
         
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();

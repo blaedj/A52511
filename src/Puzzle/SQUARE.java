@@ -20,6 +20,8 @@ public enum SQUARE {
      */
     public static SQUARE fromInt(int x){
         switch(x){
+            case(0):
+                return BLANK;
             case(1):
                 return ONE;
             case(2):

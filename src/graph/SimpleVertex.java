@@ -15,6 +15,10 @@ public class SimpleVertex implements Vertex {
         this.name = name;
     }
 
+    public SimpleVertex(){
+        this("");
+    }
+    
     public void setDistance(int distance) {
         this.distance = distance;
     }
