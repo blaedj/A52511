@@ -5,43 +5,73 @@ import framework.State;
 
 /**
  *
- * @author blaed
+ * @author Blaed Johnston
  */
 public class PuzzleMove extends Move{
     
     /** Constructs a new PuzzleMove Object.
      * @param moveName the name of the move to be constructed. It is an error if the move name is not one of the following:
      * one, two, three, four, five, six, seven
-     * 
+     *
      * */
     public PuzzleMove(String moveName){
         super(moveName);
         Integer i;
         for(i=1; i<9; i++){
-            if(!moveName.equals("Tile1") || !moveName.equals("Tile")
-                    || !moveName.equals("three") || !moveName.equals("four")
-                    || !moveName.equals("five") || !moveName.equals("six")
-                    || !moveName.equals("seven") || !moveName.equals("eight")){
-            System.out.println("Internal error. Invalid move name" + moveName);
+            if(!moveName.equals("Tile1") && !moveName.equals("Tile2")
+                    && !moveName.equals("Tile3") && !moveName.equals("Tile4")
+                    && !moveName.equals("Tile5") && !moveName.equals("Tile6")
+                    && !moveName.equals("Tile7") && !moveName.equals("Tile8")){
+                System.out.println("Internal error. Invalid move name" + moveName);
             }
         }
     }
     
     @Override
     public State doMove(State otherState) {
-
+        
         PuzzleState state = (PuzzleState) otherState;
-
+        
         String name = getMoveName();
-        int tileValueInt = name.charAt(0);//the int equiv of the value of the tile to be moves
-        String direction = name.substring(1);//the direction that the tile is to be moved
-        SQUARE tileVal = SQUARE.fromInt(tileValueInt);//the actual value of the tile to be moved
+        int tileValueInt = 0;//the int equiv of the value of the tile to be moves
+	char tileIntPortion = name.charAt(4);
+	switch(tileIntPortion){
+	case('1'):
+	    tileValueInt = 1;
+	    break;
+	case('2'):
+	    tileValueInt = 2;
+	    break;
+	case('3'):
+	    tileValueInt = 3;
+	    break;
+	case('4'):
+	    tileValueInt = 4;
+	    break;
+	case('5'):
+	    tileValueInt = 5;
+	    break;
+	case('6'):
+	    tileValueInt = 6;
+	    break;
+	case('7'):
+	    tileValueInt = 7;
+	    break;
+	case('8'):
+	    tileValueInt = 8;
+	    break;
+	default:
+	    break;
+	}
+
+        SQUARE tileVal = SQUARE.fromInt(tileValueInt);//the actual value of the tile to be moved 
         int posCurrent = state.getLocation(tileVal);//the location on the board of the tile to be moved
 
         int blankLoc = state.getLocation(SQUARE.BLANK);//the location of the BLANK tile
-	if(!adjacent(blankLoc, posCurrent)){
-		return null;
-	}
+
+        if(!adjacent(blankLoc, posCurrent)){
+            return null;
+        }
         state.setTile(blankLoc, tileVal);
         state.setTile(posCurrent, tileVal);
         return state;
@@ -61,7 +91,7 @@ public class PuzzleMove extends Move{
      */
     private boolean adjacent(int a, int b){
         if(a < 1 || a > 9||b<1||b>9){
-            System.err.println("invalid adjacent comparator");
+            System.err.println("invalid adjacent comparator. a = "+a+"b="+b);
             return false;
         }
         switch(a){

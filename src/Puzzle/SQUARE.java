@@ -10,7 +10,7 @@ package Puzzle;
  */
 public enum SQUARE {
     
-    ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, BLANK;
+    ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, BLANK, EMPTY;
     
     
     /** 

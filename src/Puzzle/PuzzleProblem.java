@@ -7,70 +7,77 @@ import Puzzle.PuzzleMove;
 
 /**
  *
- * @author blaed
+ * @author Blaed Johnston
  */
 public class PuzzleProblem extends Problem{
     
     public PuzzleProblem(){
-        SQUARE[] a = new SQUARE[10];
-        initialize(a);
+
+	ArrayList<SQUARE> a = initialize();
         PuzzleState state = new PuzzleState("initialState", a);
         setCurrentState(state);
         
         ArrayList<Move> moveList = new ArrayList<>();
-        
-        Integer i;
-        String mvName;
 
-        for(i=1; i<9; i++){
-	    mvName = "tile"+i.toString();
-	    moveList.add(new PuzzleMove(mvName));
-        }
+	moveList.add(new PuzzleMove("Tile1"));
+	moveList.add(new PuzzleMove("Tile2"));
+	moveList.add(new PuzzleMove("Tile3"));
+	moveList.add(new PuzzleMove("Tile4"));
+	moveList.add(new PuzzleMove("Tile5"));
+	moveList.add(new PuzzleMove("Tile6"));
+	moveList.add(new PuzzleMove("Tile7"));
+	moveList.add(new PuzzleMove("Tile8"));
+	
         System.out.println(moveList.size());
         setMoves(moveList);
         String introString = "Welcome to the 8-puzzle problem. Any tile can be moved to an adjacent blank tile./n"
-                + "Try to move the tiles into the final state shown below.\n"
-                + "| 1  2  3|\n"
-                + "| 8     4|\n"
-                + "|_7 _6 _5|\n";
+	    + "Try to move the tiles into the final state shown below.\n"
+	    + "| 1  2  3|\n"
+	    + "| 8     4|\n"
+	    + "|_7 _6 _5|\n";
         setIntroduction(introString);
     
     }
         
         
-        /**
-         * Initializes the state of the board to match the required initial state
-         * May need to be changed for various initial states.
-         */
-        private void initialize(SQUARE a[]){
-            a[1] = SQUARE.TWO;
-            a[2] = SQUARE.EIGHT;
-            a[3] = SQUARE.THREE;
-            a[4] = SQUARE.ONE;
-            a[5] = SQUARE.SIX;
-            a[6] = SQUARE.FOUR;
-            a[7] = SQUARE.SEVEN;
-            a[8] = SQUARE.BLANK;
-            a[9] = SQUARE.FIVE;
-        }
+    /**
+     * Initializes the state of the board to match the required initial state
+     * May need to be changed for various initial states.
+     */
+    private ArrayList<SQUARE> initialize(){
+	ArrayList<SQUARE> a = new ArrayList<>();
+	a.add(SQUARE.EMPTY);
+	a.add(SQUARE.TWO);
+	a.add(SQUARE.EIGHT);
+	a.add(SQUARE.THREE);
+	a.add(SQUARE.ONE);
+	a.add(SQUARE.SIX);
+	a.add(SQUARE.FOUR);
+	a.add(SQUARE.SEVEN);
+	a.add(SQUARE.BLANK);
+	a.add(SQUARE.FIVE);
+
+	return a;
+    }
         
-        @Override
+    @Override
         public boolean success() {
-            PuzzleState curState = (PuzzleState) getCurrentState();
-            SQUARE[] finalBoard = new SQUARE[10];
-            finalBoard[0] = null;
-            finalBoard[1] = SQUARE.ONE;
-            finalBoard[2] = SQUARE.TWO;
-            finalBoard[3] = SQUARE.THREE;
-            finalBoard[4] = SQUARE.EIGHT;
-            finalBoard[5] = SQUARE.BLANK;
-            finalBoard[6] = SQUARE.FOUR;
-            finalBoard[7] = SQUARE.SEVEN;
-            finalBoard[8] = SQUARE.SIX;
-            finalBoard[9] = SQUARE.FIVE;
-            PuzzleState finalState = new PuzzleState("Final", finalBoard);
+	PuzzleState curState = (PuzzleState) getCurrentState();
+	
+        ArrayList<SQUARE> finalBoard = new ArrayList<>();
+	finalBoard.add(SQUARE.EMPTY);
+	finalBoard.add(SQUARE.ONE);
+	finalBoard.add(SQUARE.TWO);
+	finalBoard.add(SQUARE.THREE);
+	finalBoard.add(SQUARE.EIGHT);
+	finalBoard.add(SQUARE.BLANK);
+	finalBoard.add(SQUARE.FOUR);
+	finalBoard.add(SQUARE.SEVEN);
+	finalBoard.add(SQUARE.SIX);
+	finalBoard.add(SQUARE.FIVE);
+	PuzzleState finalState = new PuzzleState("Final", finalBoard);
                         
-            return curState.equals(finalState);
-        }
+	return curState.equals(finalState);
+    }
 
 }

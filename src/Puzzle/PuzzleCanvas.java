@@ -43,10 +43,11 @@ public class PuzzleCanvas extends Canvas {
         setSize(getPreferredSize());
 
         /**@TODO need to add and create any objects to be drawn*/
+
         quickDraw =
-                "| "+ aState.board[1].toString() +"  "+ aState.board[2].toString() +"  "+ aState.board[3].toString() +"|\n"
-                + "| "+ aState.board[4].toString() +" "+ aState.board[5].toString() +"   "+ aState.board[6].toString() +"|\n"
-                + "|_"+ aState.board[7].toString() +" _"+ aState.board[8].toString() +" _"+ aState.board[9].toString() +"|\n";
+	    "| "+ aState.getBoard().get(1).toString() +"  "+ aState.getBoard().get(2).toString() +"  "+ aState.getBoard().get(3).toString() +"|\n"
+	    + "| "+ aState.getBoard().get(4).toString() +" "+ aState.getBoard().get(5).toString() +"   "+ aState.getBoard().get(6).toString() +"|\n"
+	    + "|_"+ aState.getBoard().get(7).toString() +" _"+ aState.getBoard().get(8).toString() +" _"+ aState.getBoard().get(9).toString() +"|\n";
         JTextArea quickDrawArea = new JTextArea(quickDraw);
         add(quickDrawArea);
         repaint();

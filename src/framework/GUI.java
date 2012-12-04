@@ -64,7 +64,7 @@ public class GUI extends JComponent {
     }
     
     
-    //Depreated, use canvas instead
+    //Deprecated, use canvas instead
     private JTextArea createState(String a){
         JTextArea stateRep = new JTextArea(a);
         stateRep.setEditable(false);
