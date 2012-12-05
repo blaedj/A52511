@@ -73,7 +73,7 @@ public class PuzzleMove extends Move{
             return null;
         }
         state.setTile(blankLoc, tileVal);//sets the value of the blank tile(at index blankLoc) to value of the tile to move 
-        state.setTile(posCurrent, tileVal);
+        state.setTile(posCurrent, SQUARE.BLANK);//sets the tile place that we moved to blank
         return state;
     }
     

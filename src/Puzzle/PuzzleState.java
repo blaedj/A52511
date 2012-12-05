@@ -47,9 +47,7 @@ public class PuzzleState extends SimpleVertex implements State{
      * @param the values of the 1-9 indices of the board matrix, they represent the value of each tile in order
      */
     public PuzzleState(int one, int two, int three, int four, int five, int six, int seven, int eight, int nine){
-        //super();
-        //board = new ArrayList<>(10);
-        //board.ensureCapacity(10);
+       
         board.add(SQUARE.EMPTY);
         board.add(SQUARE.fromInt(one));
         board.add(SQUARE.fromInt(two));
@@ -64,11 +62,12 @@ public class PuzzleState extends SimpleVertex implements State{
     
     @Override
     public String toString() {
-        // String returnString ="| "+ this.board[1].toString() +"  "+ this.board[2].toString() +"  "+ this.board[3].toString() +"|\n"
-        //     + "| "+ this.board[4].toString() +" "+ this.board[5].toString() +"   "+ this.board[6].toString() +"|\n"
-        //     + "|_"+ this.board[7].toString() +" _"+ this.board[8].toString() +" _"+ this.board[9].toString() +"|\n";
-        // //return returnString;
-        return "astring";
+
+        String stringState = "| "+ this.getBoard().get(1).toString() +"  "+ this.getBoard().get(2).toString() +"  "+ this.getBoard().get(3).toString() +"|\n"
+                + "| "+ this.getBoard().get(4).toString() +" "+ this.getBoard().get(5).toString() +"   "+ this.getBoard().get(6).toString() +"|\n"
+                + "|_"+ this.getBoard().get(7).toString() +" _"+ this.getBoard().get(8).toString() +" _"+ this.getBoard().get(9).toString() +"|\n";
+        
+        return stringState;
     }
     
     
@@ -83,7 +82,6 @@ public class PuzzleState extends SimpleVertex implements State{
             return false;
         }
         else{
-            //int index = board.indexOf(tileLoc); BUG: trting to fins the index of an int, already know the index
             board.set(tileLoc, val);
             return true;
         }
@@ -102,7 +100,7 @@ public class PuzzleState extends SimpleVertex implements State{
         }
         else{
             PuzzleState anOther = (PuzzleState) other;
-            for(int i = 1; i < 9; i++){
+            for(int i = 1; i < 10; i++){
                 if(this.board.get(i) != anOther.getBoard().get(i)){
                     return false;}
             }//end ouside for()
