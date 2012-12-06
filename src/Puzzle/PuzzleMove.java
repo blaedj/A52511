@@ -65,15 +65,22 @@ public class PuzzleMove extends Move{
 	}
 
         SQUARE tileVal = SQUARE.fromInt(tileValueInt);//the actual value of the tile to be moved 
-        int posCurrent = state.getLocation(tileVal);//the location on the board of the tile to be moved
+        int tilePositioninitial = state.getLocation(tileVal);//the location on the board of the tile to be moved
 
-        int blankLoc = state.getLocation(SQUARE.BLANK);//the location of the BLANK tile
+        int blankLocation = state.getLocation(SQUARE.BLANK);//the location of the BLANK tile
 
-        if(!adjacent(blankLoc, posCurrent)){
+        if(!adjacent(blankLocation, tilePositioninitial)){
             return null;
         }
-        state.setTile(blankLoc, tileVal);//sets the value of the blank tile(at index blankLoc) to value of the tile to move 
-        state.setTile(posCurrent, SQUARE.BLANK);//sets the tile place that we moved to blank
+        boolean moveCompleted1 = state.setTile(blankLocation, tileVal);//sets the value of the blank tile(at index blankLocation) to value of the tile to move 
+        boolean moveCompleted2 = state.setTile(tilePositioninitial, SQUARE.BLANK);//sets the tile place that we moved to blank
+
+        if(!moveCompleted1 || !moveCompleted2){
+            System.err.println("Move Not Completed in PuzzleMove.java line 79");
+        }
+        else{
+            System.err.println("Move Completed! PuzzleMove.java line 82");
+        }
         return state;
     }
     

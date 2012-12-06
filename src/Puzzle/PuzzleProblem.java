@@ -4,6 +4,7 @@ import framework.Move;
 import framework.Problem;
 import java.util.ArrayList;
 import Puzzle.PuzzleMove;
+import framework.State;
 
 /**
  *
@@ -37,12 +38,20 @@ public class PuzzleProblem extends Problem{
 	    + "|_7 _6 _5|\n";
         setIntroduction(introString);
     }
-                
+
+/**
+ * Overridden state setter 
+ * @param state the new current state of the problem
+ * @pre the param state is a PuzzleState
+ */
+    @Override
+    public void setCurrentState(State state){
+        curPuzzleState = (PuzzleState) state;
+    }
+    
     @Override
         public boolean success() {
-
         PuzzleState finalState = new PuzzleState(1,2,3,8,0,4,7,6,5);
-        //PuzzleState curState = (PuzzleState) getCurrentState();
 	boolean retVal = curPuzzleState.equals(finalState);
         return retVal;
     }

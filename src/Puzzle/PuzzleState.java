@@ -71,7 +71,7 @@ public class PuzzleState extends SimpleVertex implements State{
     }
     
     
-    /** Setter for any index of board
+    /** Setter for any index of board 
      * @param tileLoc the index of the board that is to be changed, must be between 1-9, inclusive.
      * @param val the value to be set
      *@return true if the index was successfully changed, false if tileLoc is outside the acceptable range

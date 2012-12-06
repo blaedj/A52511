@@ -33,8 +33,6 @@ public abstract class Canvas extends JComponent{
     return wide;
     }
     
-    
-    
     public State getState(){
         return state;
     }
