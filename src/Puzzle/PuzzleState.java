@@ -149,9 +149,5 @@ public class PuzzleState extends SimpleVertex implements State{
         }
                 
         return -1;
-        /**should never get here, else something has gone wrong in
-         * the initialization of board, since all tiles should be
-         * included every time.
-         */
     }
 }//end PuzzleState

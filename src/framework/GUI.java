@@ -21,8 +21,9 @@ public class GUI extends JComponent {
     public GUI(Problem problem, Canvas canvas) {
         this.aProblem = problem;
         this.canvas = canvas;
-        initState = problem.getCurrentState();
+        initState = canvas.getInitState();
         initStateString = initState.toString();
+        moveCount = 0;
         setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
         initialization();
         this.canvas.repaint();
@@ -32,9 +33,9 @@ public class GUI extends JComponent {
     // private methods and instance fields go here
     private void createPanel(){
         pane = new JPanel(new BorderLayout(15, 15));
-
-        JComponent curState = canvas;
-
+        
+//        JComponent curState = canvas;
+        
         
         JButton resetButton = new JButton("Reset");
         resetButton.addActionListener(new ActionListener() {
@@ -45,7 +46,7 @@ public class GUI extends JComponent {
             }
         });
         
-        pane.add(curState, BorderLayout.WEST);
+        pane.add(canvas, BorderLayout.WEST);
         pane.add(createIntro(intro), BorderLayout.NORTH);
         pane.add(createMoves(), BorderLayout.EAST);
         pane.add(resetButton, BorderLayout.SOUTH);
@@ -53,7 +54,7 @@ public class GUI extends JComponent {
         
         this.add(pane);
         
-   }
+    }
     
     private JComponent createIntro(String s){
         JTextArea introField = new JTextArea(s);
@@ -64,7 +65,11 @@ public class GUI extends JComponent {
     }
     
     
-    //Deprecated, use canvas instead
+    /**
+     * @deprecated Use canvas instead
+     * @param a the string representation of the state
+     * @return JTextarea containing a
+     */
     private JTextArea createState(String a){
         JTextArea stateRep = new JTextArea(a);
         stateRep.setEditable(false);
@@ -83,18 +88,18 @@ public class GUI extends JComponent {
             but.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent event){
+                    State newState = move.doMove(aProblem.getCurrentState());
                     
-                    if(move.doMove(aProblem.getCurrentState()) == null){
+                    if(newState == null){
                         JOptionPane.showMessageDialog(null, "Invalid Move");
                     }
                     else{
-                        
-                        State newState = move.doMove(aProblem.getCurrentState());
                         canvas.setState(newState);
                         aProblem.setCurrentState(newState);
                         redraw();
+                        moveCount++;
                         if(aProblem.success()){
-                            JOptionPane.showMessageDialog(null, "Congratulations! You have solved the problem!");
+                            JOptionPane.showMessageDialog(null, "Congratulations! You have solved the problem in "+moveCount+" moves!");
                         }
                     }
                 }
@@ -110,11 +115,11 @@ public class GUI extends JComponent {
     
     private void initialization(){
         intro = aProblem.getIntroduction();
-        currentState = aProblem.getCurrentState().toString();
+        //currentState = aProblem.getCurrentState().toString();
     }
     
     private void resetProblem(){
-        aProblem.setCurrentState(initState);
+        aProblem.resetToInit();
         canvas.setState(initState);
         redraw();
     }
@@ -130,7 +135,8 @@ public class GUI extends JComponent {
     private JPanel pane;
     final private State initState;
     final private String initStateString;
-    final private Problem aProblem;
+    private Problem aProblem;
     private String intro;
     private String currentState;
+    private int moveCount;
 }

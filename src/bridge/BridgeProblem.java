@@ -67,7 +67,11 @@ public class BridgeProblem extends Problem {
                 "the bridge in no more than 17 minutes.\n\n");
     }
     
-
+    @Override
+    public void resetToInit(){
+        this.setCurrentState(new BridgeState());
+    }
+    
     /**
      * Returns whether the current state of this problem is a success.
      * Note that this method implements the abstract <b>success</b> method declared

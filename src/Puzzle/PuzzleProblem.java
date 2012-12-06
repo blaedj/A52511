@@ -48,7 +48,16 @@ public class PuzzleProblem extends Problem{
     public void setCurrentState(State state){
         curPuzzleState = (PuzzleState) state;
     }
+
+    @Override
+    public void resetToInit(){
+        this.setCurrentState(new PuzzleState());
+    }
     
+    @Override
+    public State getCurrentState(){
+        return curPuzzleState;
+    }
     @Override
         public boolean success() {
         PuzzleState finalState = new PuzzleState(1,2,3,8,0,4,7,6,5);

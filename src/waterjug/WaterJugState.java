@@ -15,7 +15,7 @@ public class WaterJugState implements State {
     
     public WaterJugState(int x, int y) {
         if(x < 0 || x > 3 || y < 0 || y > 4){
-            System.out.println("error, WJState");
+            System.err.println("error, WJState");
         }
         else{
             xWaterLvl = x;
@@ -23,6 +23,11 @@ public class WaterJugState implements State {
         }
     }
 
+    public WaterJugState(){
+        xWaterLvl = 0;
+        yWaterLvl = 0;
+    }
+    
     
     /**
        Tests for equality between this state and the argument state.

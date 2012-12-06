@@ -42,6 +42,20 @@ public class BridgeState implements State {
     }
     
     /**
+     * Creates a default BridgeState, with everyone on the west and time=0
+     */
+    public BridgeState(){
+        P1Position = Position.WEST;
+        P2Position = Position.WEST;
+        P5Position = Position.WEST;
+        P10Position = Position.WEST;
+        flashlightPosition = Position.WEST;
+        timeSoFar = 0;
+    }
+    
+    
+    
+    /**
      * Compares this bridge state with another for equality.
      * Two bridge states are equal if the positions of the persons and 
      * flashlight in one state are matched by their positions in the other.

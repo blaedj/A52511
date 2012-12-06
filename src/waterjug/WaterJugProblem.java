@@ -61,6 +61,12 @@ public class WaterJugProblem extends Problem {
         
     }
 
+    @Override
+    public void resetToInit(){
+        this.setCurrentState(new WaterJugState());
+    }
+    
+    
     /**
      * Returns whether the current state of this problem is a success.
      * Note that this method implements the abstract <b>success</b> method declared

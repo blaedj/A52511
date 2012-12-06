@@ -13,15 +13,18 @@ import javax.swing.JLabel;
 public abstract class Canvas extends JComponent{
     private State state;
     private State prevState;
+    private final State initState;
     private double high = 400;
     private double wide = 600;
     /**Creates a new canvas object
      * stores the first state object displayed
      * @param state state to be stored/displayed
+     * @param initState the default initial state
      */
-    public Canvas(State state){
+    public Canvas(State state, State initState){
         this.state = state;
         prevState = state;
+        this.initState = initState;
         setVisible(true);
     }
 
@@ -49,7 +52,11 @@ public abstract class Canvas extends JComponent{
     public void setPrevState(State aState){
         prevState = aState;
     }
-
+    
+    public State getInitState(){
+        return initState;
+    }
+    
     @Override
     public Dimension getPreferredSize(){
         return new Dimension((int) wide, (int) high);

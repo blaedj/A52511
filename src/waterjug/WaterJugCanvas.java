@@ -36,7 +36,7 @@ public class WaterJugCanvas extends Canvas {
     private Rectangle2D.Double watY;
     
     public WaterJugCanvas(WaterJugState wState){
-        super(wState);
+        super(wState, new WaterJugState());
         
         wide = 600;
         high = 400;

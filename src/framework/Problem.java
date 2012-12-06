@@ -39,6 +39,8 @@ public abstract class Problem {
         this.currentState = currentState;
     }
 
+    public abstract void resetToInit();
+    
     /**
      * Gets an explanatory introduction string for the problem.
      * @return the introduction string

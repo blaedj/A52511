@@ -17,7 +17,7 @@ public class WaterJugGUI extends JFrame {
     }
     
     /**
-     * This method launches the gui.
+     * This method launches the GUI.
      * @param args ignored
      */
     public static void main(String[] args) {

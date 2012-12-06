@@ -33,7 +33,7 @@ public class PuzzleMove extends Move{
         PuzzleState state = (PuzzleState) otherState;
         
         String name = getMoveName();
-        int tileValueInt = 0;//the int equiv of the value of the tile to be moves
+        int tileValueInt = 0;//the int equiv of the value of the tile to be moved.
 	char tileIntPortion = name.charAt(4);
 	switch(tileIntPortion){
 	case('1'):
@@ -74,13 +74,13 @@ public class PuzzleMove extends Move{
         }
         boolean moveCompleted1 = state.setTile(blankLocation, tileVal);//sets the value of the blank tile(at index blankLocation) to value of the tile to move 
         boolean moveCompleted2 = state.setTile(tilePositioninitial, SQUARE.BLANK);//sets the tile place that we moved to blank
-
-        if(!moveCompleted1 || !moveCompleted2){
-            System.err.println("Move Not Completed in PuzzleMove.java line 79");
-        }
-        else{
-            System.err.println("Move Completed! PuzzleMove.java line 82");
-        }
+        
+//        if(!moveCompleted1 || !moveCompleted2){
+//            System.err.println("Move Not Completed in PuzzleMove.java line 79");
+//        }
+//        else{
+//            System.err.println("Move Completed! PuzzleMove.java line 82");
+//        }
         return state;
     }
     
@@ -122,27 +122,6 @@ public class PuzzleMove extends Move{
                 return(b==6||b==8);
         }
         return false;
-    }
-    
-    /** Decides which get(direction)Pos to call and calls if
-     * @param direction the direction of the value being queried for
-     * @param curPos the location of the starting tile
-     * @return the location of the tile to the right, left, up or down of the tile,
-     * returns 0 as an error message.
-     */
-    private int getDirectedPos(String direction, int curPos){
-        switch(direction){
-            case("Right"):
-                return getRight(curPos);
-            case("Left"):
-                return getLeft(curPos);
-            case("Up"):
-                return getAbove(curPos);
-            case("Down"):
-                return getBelow(curPos);
-            default:
-                return 0;
-        }
     }
     
     

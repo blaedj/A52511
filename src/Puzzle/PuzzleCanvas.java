@@ -26,7 +26,7 @@ public class PuzzleCanvas extends Canvas {
     
     
     public PuzzleCanvas(PuzzleState aState){
-        super(aState);
+        super(aState, new PuzzleState());
         currentState = (PuzzleState) aState;
         
         double wide = getPreferredWidth();
@@ -45,7 +45,12 @@ public class PuzzleCanvas extends Canvas {
         
     }
     
-    //deprecated, early testing method.
+    
+    /**
+     * @deprecated early method for testing, do not use.
+     * @param aState
+     * @return 
+     */
     private String simpleStateDepict(PuzzleState aState){
         String stringState = "| "+ aState.getBoard().get(1).toString() +"  "+ aState.getBoard().get(2).toString() +"  "+ aState.getBoard().get(3).toString() +"|\n"
                 + "| "+ aState.getBoard().get(4).toString() +" "+ aState.getBoard().get(5).toString() +"   "+ aState.getBoard().get(6).toString() +"|\n"
@@ -56,12 +61,6 @@ public class PuzzleCanvas extends Canvas {
     @Override
     protected void makeObjects(){
        
-        /**@TODO create 9 square, each one represents a tile. fill them with a color and put a value in the center of each.
-         * Then add them to the grid according to what their spot is. rendering will involve changing the value of the
-         * character in the center of each square.
-         *TRY TO AVOID CALCULATING THE POSITION AT ALL!!!! USE BUILT INS!!!!
-         */
-                
         double wide = getWidth();
         double high = getHeight();
         

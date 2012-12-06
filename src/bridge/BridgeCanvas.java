@@ -37,7 +37,7 @@ public static void main(String[] args) {
      
      */
     public BridgeCanvas(BridgeState bridgeState) {
-        super(bridgeState);//call to superclass constructor
+        super(bridgeState, new BridgeState());//call to superclass constructor
         /** 
          * need to create and store any objects to be 
          * drawn by paintComponent()          
