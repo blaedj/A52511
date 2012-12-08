@@ -33,9 +33,7 @@ public class GUI extends JComponent {
     // private methods and instance fields go here
     private void createPanel(){
         pane = new JPanel(new BorderLayout(15, 15));
-        
-//        JComponent curState = canvas;
-        
+        //        JComponent curState = canvas;
         
         JButton resetButton = new JButton("Reset");
         resetButton.addActionListener(new ActionListener() {
@@ -45,6 +43,20 @@ public class GUI extends JComponent {
                 resetProblem();
             }
         });
+        
+        JPanel searchTypes = new JPanel();
+        JRadioButton breadth = new JRadioButton("Breadth First");
+        JRadioButton depth = new JRadioButton("Depth First");
+        ButtonGroup searchButtons = new ButtonGroup();
+        searchButtons.add(depth);
+        searchButtons.add(breadth);
+        searchTypes.setBorder(BorderFactory.createTitledBorder("Search Types"));
+        /**
+         * @TODO Finish creating the UI for solving the problem, include step by step and all at once
+         */
+        
+        
+        JButton solveButton = new JButton();
         
         pane.add(canvas, BorderLayout.WEST);
         pane.add(createIntro(intro), BorderLayout.NORTH);

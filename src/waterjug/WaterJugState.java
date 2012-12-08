@@ -1,6 +1,7 @@
 package waterjug;
 
 import framework.State;
+import graph.SimpleVertex;
 
 /**
  * This class represents states of the Water Jug problem.
@@ -9,7 +10,7 @@ import framework.State;
  * Note that this class implements the <b>State</b> interface
  * and therefore imports <b>framework.State</b>.
  */
-public class WaterJugState implements State {
+public class WaterJugState extends SimpleVertex implements State {
 
     /** */
     

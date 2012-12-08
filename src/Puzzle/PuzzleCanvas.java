@@ -142,13 +142,9 @@ public class PuzzleCanvas extends Canvas {
         tileVal6 = currentState.getBoard().get(6).toString();
         tileVal7 = currentState.getBoard().get(7).toString();
         tileVal8 = currentState.getBoard().get(8).toString();
-        System.out.println("Tile value 8 is:"+tileVal8+".");
         tileVal9 = currentState.getBoard().get(9).toString();
     }
     
-    /**
-     * @TODO implement paintComponent()
-     * @TODO implement render()*/
     private String quickDraw;
     private PuzzleState currentState;
     private Rectangle2D.Double tile1;

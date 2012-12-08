@@ -14,8 +14,8 @@ public abstract class Canvas extends JComponent{
     private State state;
     private State prevState;
     private final State initState;
-    private double high = 400;
-    private double wide = 600;
+    private double high = 300;
+    private double wide = 450;
     /**Creates a new canvas object
      * stores the first state object displayed
      * @param state state to be stored/displayed

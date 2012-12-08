@@ -1,6 +1,7 @@
 package bridge;
 
 import framework.State;
+import graph.SimpleVertex;
 
 /**
  * This class represents states of the Bridge Crossing problem.
@@ -12,7 +13,7 @@ import framework.State;
  * the same as in the previous assignment.
  * @author your name here
  */
-public class BridgeState implements State {
+public class BridgeState extends SimpleVertex implements State {
 
     /**
      * Creates a new bridge state.  
