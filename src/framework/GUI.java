@@ -1,5 +1,7 @@
 package framework;
 
+import graph.DequeAdder;
+import graph.Vertex;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -7,6 +9,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Deque;
 import javax.swing.*;
 
 
@@ -47,7 +50,9 @@ public class GUI extends JComponent {
         JPanel searchTypes = new JPanel();
         JRadioButton breadth = new JRadioButton("Breadth First");
         JRadioButton depth = new JRadioButton("Depth First");
-        ButtonGroup searchButtons = new ButtonGroup();
+        final ButtonGroup searchButtons = new ButtonGroup();
+        breadth.setActionCommand("BreadthFirst");
+        depth.setActionCommand("DepthFirst");
         searchButtons.add(depth);
         searchButtons.add(breadth);
         searchTypes.setBorder(BorderFactory.createTitledBorder("Search Types"));
@@ -56,7 +61,37 @@ public class GUI extends JComponent {
          */
         
         
-        JButton solveButton = new JButton();
+        JButton solveButton = new JButton("SOLVE");
+        
+        solveButton.addActionListener(new ActionListener(){
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                DequeAdder tailAdder = new DequeAdder(){
+                    @Override
+                    public void add(Vertex vertex, Deque<Vertex> deque) {
+                        deque.addLast(vertex);
+                    }
+                };
+                
+                DequeAdder headAdder = new DequeAdder() {
+
+                    @Override
+                    public void add(Vertex vertex, Deque<Vertex> deque) {
+                        deque.addFirst(vertex);
+                    }
+                };
+
+                if(searchButtons.getSelection().getActionCommand().equals("BreadthFirst")){
+                    Vertex solution = aProblem.search((Vertex)aProblem.getCurrentState(), tailAdder);
+                }
+                else{
+                    Vertex solution = aProblem.search((Vertex)aProblem.getCurrentState(), headAdder);
+                }
+            }
+        
+        });
+        
         
         pane.add(canvas, BorderLayout.WEST);
         pane.add(createIntro(intro), BorderLayout.NORTH);
