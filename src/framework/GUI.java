@@ -64,7 +64,7 @@ public class GUI extends JComponent {
         JButton solveButton = new JButton("SOLVE");
         
         solveButton.addActionListener(new ActionListener(){
-
+            
             @Override
             public void actionPerformed(ActionEvent e) {
                 DequeAdder tailAdder = new DequeAdder(){
@@ -73,25 +73,20 @@ public class GUI extends JComponent {
                         deque.addLast(vertex);
                     }
                 };
-                
-                DequeAdder headAdder = new DequeAdder() {
-
-                    @Override
+                 DequeAdder headAdder = new DequeAdder() {
+                     @Override
                     public void add(Vertex vertex, Deque<Vertex> deque) {
                         deque.addFirst(vertex);
                     }
                 };
-
-                if(searchButtons.getSelection().getActionCommand().equals("BreadthFirst")){
-                    Vertex solution = aProblem.search((Vertex)aProblem.getCurrentState(), tailAdder);
+                 if(searchButtons.getSelection().getActionCommand().equals("BreadthFirst")){
+                    solution = aProblem.search((Vertex)aProblem.getCurrentState(), tailAdder);
                 }
-                else{
-                    Vertex solution = aProblem.search((Vertex)aProblem.getCurrentState(), headAdder);
+                 else if(searchButtons.getSelection().getActionCommand().equals("DepthFirst")){
+                    solution = aProblem.search((Vertex)aProblem.getCurrentState(), headAdder);
                 }
             }
-        
-        });
-        
+         });
         
         pane.add(canvas, BorderLayout.WEST);
         pane.add(createIntro(intro), BorderLayout.NORTH);
@@ -178,7 +173,7 @@ public class GUI extends JComponent {
     }
     
     
-    
+    private Vertex solution;
     private JPanel pane;
     final private State initState;
     final private String initStateString;
