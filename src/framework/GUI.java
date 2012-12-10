@@ -8,8 +8,7 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.Deque;
+import java.util.*;
 import javax.swing.*;
 
 
@@ -62,9 +61,15 @@ public class GUI extends JComponent {
         
         
         JButton solveButton = new JButton("SOLVE");
+        JPanel resultsPanel = new JPanel();
+        final JButton showNext = new JButton("SHOW NEXT MOVE");
+        final JButton showAll = new JButton("SHOW ALL MOVES");
+        JTextArea solutionStats = new JTextArea();
+        
+        
         
         solveButton.addActionListener(new ActionListener(){
-
+            
             @Override
             public void actionPerformed(ActionEvent e) {
                 DequeAdder tailAdder = new DequeAdder(){
@@ -73,24 +78,42 @@ public class GUI extends JComponent {
                         deque.addLast(vertex);
                     }
                 };
-                
-                DequeAdder headAdder = new DequeAdder() {
-
-                    @Override
+                 DequeAdder headAdder = new DequeAdder() {
+                     @Override
                     public void add(Vertex vertex, Deque<Vertex> deque) {
                         deque.addFirst(vertex);
                     }
                 };
-
-                if(searchButtons.getSelection().getActionCommand().equals("BreadthFirst")){
-                    Vertex solution = aProblem.search((Vertex)aProblem.getCurrentState(), tailAdder);
+                 if(searchButtons.getSelection().getActionCommand().equals("BreadthFirst")){
+                    solution = aProblem.search((Vertex)aProblem.getCurrentState(), tailAdder);
                 }
                 else{
-                    Vertex solution = aProblem.search((Vertex)aProblem.getCurrentState(), headAdder);
+                    solution = aProblem.search((Vertex)aProblem.getCurrentState(), headAdder);
                 }
+                 showNext.setEnabled(true);
+                 showAll.setEnabled(true);
+                 setSolutionMoves();
             }
+            
+        });//end ActionListener
         
-        });
+        
+        
+        showNext.setEnabled(false);
+        showAll.setEnabled(false);
+        
+        showNext.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                State newState = (State) solutionMoves.pop();
+                canvas.setState(newState);
+                aProblem.setCurrentState(newState);
+                redraw();
+            }
+            
+        });//end addActionListener()
+
+        /**@TODO add an actionlisterner for the showAll button and finish adding the results panel and solution stats */
         
         
         pane.add(canvas, BorderLayout.WEST);
@@ -101,6 +124,17 @@ public class GUI extends JComponent {
         
         this.add(pane);
         
+    }
+    
+    /**
+     * function to get the entire solution path for the problem.
+     */
+    private void setSolutionMoves(){
+        Vertex parent = solution;
+        while(parent != null){
+            parent = parent.getPredecessor();
+            solutionMoves.push(parent);
+        }
     }
     
     private JComponent createIntro(String s){
@@ -186,4 +220,6 @@ public class GUI extends JComponent {
     private String intro;
     private String currentState;
     private int moveCount;
+    private Vertex solution;
+    private Stack<Vertex> solutionMoves;
 }
