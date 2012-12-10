@@ -61,9 +61,7 @@ public abstract class Problem {
      * returns the final success state.
      */
     public Vertex search(Vertex start, DequeAdder adder){
-        /**
-         * @TODO Create Adjacency Lists and store them in hash tables
-         */
+
         deque = new LinkedList<>();
         start.setDistance(0);
         start.setPredecessor(null);

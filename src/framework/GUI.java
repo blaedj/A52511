@@ -55,16 +55,19 @@ public class GUI extends JComponent {
         searchButtons.add(depth);
         searchButtons.add(breadth);
         searchTypes.setBorder(BorderFactory.createTitledBorder("Search Types"));
+        searchTypes.add(depth);
+        searchTypes.add(breadth);
+        
         /**
          * @TODO Finish creating the UI for solving the problem, include step by step and all at once
          */
         
         
-        JButton solveButton = new JButton("SOLVE");
-        JPanel resultsPanel = new JPanel();
+        
+        
         final JButton showNext = new JButton("SHOW NEXT MOVE");
         final JButton showAll = new JButton("SHOW ALL MOVES");
-        JTextArea solutionStats = new JTextArea();
+        JButton solveButton = new JButton("SOLVE");
         
         
         
@@ -78,26 +81,24 @@ public class GUI extends JComponent {
                         deque.addLast(vertex);
                     }
                 };
-                 DequeAdder headAdder = new DequeAdder() {
-                     @Override
+                DequeAdder headAdder = new DequeAdder() {
+                    @Override
                     public void add(Vertex vertex, Deque<Vertex> deque) {
                         deque.addFirst(vertex);
                     }
                 };
-                 if(searchButtons.getSelection().getActionCommand().equals("BreadthFirst")){
+                if(searchButtons.getSelection().getActionCommand().equals("BreadthFirst")){
                     solution = aProblem.search((Vertex)aProblem.getCurrentState(), tailAdder);
                 }
                 else{
                     solution = aProblem.search((Vertex)aProblem.getCurrentState(), headAdder);
                 }
-                 showNext.setEnabled(true);
-                 showAll.setEnabled(true);
-                 setSolutionMoves();
+                showNext.setEnabled(true);
+                showAll.setEnabled(true);
+                setSolutionMoves();
             }
             
         });//end ActionListener
-        
-        
         
         showNext.setEnabled(false);
         showAll.setEnabled(false);
@@ -112,14 +113,38 @@ public class GUI extends JComponent {
             }
             
         });//end addActionListener()
-
+        
         /**@TODO add an actionlisterner for the showAll button and finish adding the results panel and solution stats */
         
+        showAll.addActionListener(new ActionListener() {
+            
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                while(!solutionMoves.empty()){
+                    State newState = (State) solutionMoves.pop();
+                    canvas.setState(newState);
+                    aProblem.setCurrentState(newState);
+                    redraw();
+                }
+            }
+        });//end addActionListener
         
+        JPanel resultsPanel = new JPanel();
+        
+        String  stuff = "this is a long string. \n it contains several lines \n lalalalal\nlalalalala";
+        JTextArea solutionStats = new JTextArea(stuff);
+        
+        resultsPanel.add(showNext);
+        resultsPanel.add(showAll);
+        resultsPanel.add(solutionStats);
+        resultsPanel.add(searchTypes);
+        resultsPanel.add(solveButton);
+        
+        pane.add(resultsPanel, BorderLayout.SOUTH);
         pane.add(canvas, BorderLayout.WEST);
         pane.add(createIntro(intro), BorderLayout.NORTH);
         pane.add(createMoves(), BorderLayout.EAST);
-        pane.add(resetButton, BorderLayout.SOUTH);
+        
         pane.setVisible(true);
         
         this.add(pane);
@@ -132,8 +157,8 @@ public class GUI extends JComponent {
     private void setSolutionMoves(){
         Vertex parent = solution;
         while(parent != null){
-            parent = parent.getPredecessor();
             solutionMoves.push(parent);
+            parent = parent.getPredecessor();
         }
     }
     
