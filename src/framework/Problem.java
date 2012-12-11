@@ -18,8 +18,6 @@ import java.util.*;
  * Extending classes must also override the abstract <b>success</b> method.
  */
 public abstract class Problem {
-    private int dequeOperations;
-    private int maxDequSize;
     
     /**
      * Determines whether the current state of this problem is a success.
@@ -61,34 +59,43 @@ public abstract class Problem {
      * returns the final success state.
      */
     public Vertex search(Vertex start, DequeAdder adder){
-
+        
         deque = new LinkedList<>();
         start.setDistance(0);
         start.setPredecessor(null);
         adder.add(start, deque);
+        solutionMoves = new LinkedList<>();
         while(!deque.isEmpty()){
-            Vertex curr = deque.removeFirst();
+            Vertex curr = deque.pop();
             dequeOperations++;
             setCurrentState((State) curr);
             if(success()){
+                Vertex printer = curr;
+                while(printer != null){
+                    System.err.println(printer.toString());
+                    printer = printer.getPredecessor();
+                    solutionMoves.push(printer);
+                }
+                this.setCurrentState((State) start);
                 return curr;
             }
             else{
-                for(Vertex v : expand(curr)){
+                ArrayList<Vertex> listV = (ArrayList<Vertex>) expand(curr);
+                for(Vertex v : listV){
                     adder.add(v, deque);
                     dequeOperations++;
                     if(deque.size() > maxDequSize){
-                        maxDequSize++;
+                        maxDequSize = deque.size();
                     }
                 }//end for()
             }
-        }//end "while(degue is not empty){...}"
+        }//end "while(deque is not empty){...}"
         return null;//solution was not found
     }//end search()
-   
-       
     
-      /**
+    
+    
+    /**
      * Checks to see if a vertex appears on the predecessor path
      * of an ancestor vertex.
      * @param v the vertex to check
@@ -99,24 +106,24 @@ public abstract class Problem {
         if(v.equals(ancestor)){
             return true;
         }
-
+        
         while( ancestor != null){
-        if(v.equals(ancestor))
-            return true;
-        else{
-            ancestor = ancestor.getPredecessor();
+            if(v.equals(ancestor))
+                return true;
+            else{
+                ancestor = ancestor.getPredecessor();
+            }
         }
-        }
-    return (ancestor != null);
+        return (ancestor != null);
     }
-
+    
     /**
      * Expands a vertex v in a state space search tree by creating a list
      * (its children) of all vertices adjacent to it in the state space.
-     * The list may not include any vertex on the predecessor path 
+     * The list may not include any vertex on the predecessor path
      * leading to v.
      * Each child on the list has its predecessor set to v and its distance
-     * from the root (its depth in the search tree) set to one more than v's 
+     * from the root (its depth in the search tree) set to one more than v's
      * distance.
      * @param v the vertex being expanded
      * @return a list of the children
@@ -128,7 +135,7 @@ public abstract class Problem {
         for(Move move : moves){
             if(move.doMove((State) v) != null){
                 Vertex child = (Vertex) move.doMove((State) v);
-               
+                
                 
                 if(!occursOnPath(child, v)){
                     child.setPredecessor(v);
@@ -139,6 +146,10 @@ public abstract class Problem {
             }
         }
         return childList;
+    }
+    
+    public LinkedList<Vertex> getSolutionMoves(){
+        return solutionMoves;
     }
     
     
@@ -188,7 +199,12 @@ public abstract class Problem {
      * The list of moves for this problem.
      */
     private List<Move> moves;
-
+    
     private Deque<Vertex> deque;
     
+    private int dequeOperations;
+    
+    private int maxDequSize;
+    
+    public LinkedList<Vertex> solutionMoves;
 }

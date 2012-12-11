@@ -14,7 +14,7 @@ import javax.swing.*;
 
 /**
  * A class that creates GUI components for solving search problems.
- * @author Blaed Johnstonn
+ * @author Blaed Johnston
  */
 public class GUI extends JComponent {
     private final Canvas canvas;
@@ -40,11 +40,11 @@ public class GUI extends JComponent {
         JButton resetButton = new JButton("Reset");
         resetButton.addActionListener(new ActionListener() {
             
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                resetProblem();
-            }
-        });
+		@Override
+		public void actionPerformed(ActionEvent e) {
+		    resetProblem();
+		}
+	    });
         
         JPanel searchTypes = new JPanel();
         JRadioButton breadth = new JRadioButton("Breadth First");
@@ -62,9 +62,6 @@ public class GUI extends JComponent {
          * @TODO Finish creating the UI for solving the problem, include step by step and all at once
          */
         
-        
-        
-        
         final JButton showNext = new JButton("SHOW NEXT MOVE");
         final JButton showAll = new JButton("SHOW ALL MOVES");
         JButton solveButton = new JButton("SOLVE");
@@ -73,66 +70,70 @@ public class GUI extends JComponent {
         
         solveButton.addActionListener(new ActionListener(){
             
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                DequeAdder tailAdder = new DequeAdder(){
-                    @Override
-                    public void add(Vertex vertex, Deque<Vertex> deque) {
-                        deque.addLast(vertex);
-                    }
-                };
-                DequeAdder headAdder = new DequeAdder() {
-                    @Override
-                    public void add(Vertex vertex, Deque<Vertex> deque) {
-                        deque.addFirst(vertex);
-                    }
-                };
-                if(searchButtons.getSelection().getActionCommand().equals("BreadthFirst")){
-                    solution = aProblem.search((Vertex)aProblem.getCurrentState(), tailAdder);
-                }
-                else{
-                    solution = aProblem.search((Vertex)aProblem.getCurrentState(), headAdder);
-                }
-                showNext.setEnabled(true);
-                showAll.setEnabled(true);
-                setSolutionMoves();
-            }
+		@Override
+		public void actionPerformed(ActionEvent e) {
+		    DequeAdder tailAdder = new DequeAdder(){
+			    @Override
+			    public void add(Vertex vertex, Deque<Vertex> deque) {
+				deque.addLast(vertex);
+			    }
+			};
+		    DequeAdder headAdder = new DequeAdder() {
+			    @Override
+			    public void add(Vertex vertex, Deque<Vertex> deque) {
+				deque.addFirst(vertex);
+			    }
+			};
+		    if(searchButtons.getSelection().getActionCommand().equals("BreadthFirst")){
+			solution = aProblem.search((Vertex)aProblem.getCurrentState(), tailAdder);
+
+		    }
+		    else{
+			solution = aProblem.search((Vertex)aProblem.getCurrentState(), headAdder);
+		    }
+
+                    solutionMoves = new LinkedList();
+
+                    showNext.setEnabled(true);
+		    showAll.setEnabled(true);
+		}
             
-        });//end ActionListener
+	    });//end ActionListener
         
         showNext.setEnabled(false);
         showAll.setEnabled(false);
         
         showNext.addActionListener(new ActionListener(){
-            @Override
-            public void actionPerformed(ActionEvent arg0) {
-                State newState = (State) solutionMoves.pop();
-                canvas.setState(newState);
-                aProblem.setCurrentState(newState);
-                redraw();
-            }
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+		    Vertex newState = aProblem.solutionMoves.pop();
+		    canvas.setState((State) newState);
+		    aProblem.setCurrentState((State) newState);
+		    redraw();
+		}
             
-        });//end addActionListener()
+	    });//end addActionListener()
         
         /**@TODO add an actionlisterner for the showAll button and finish adding the results panel and solution stats */
         
         showAll.addActionListener(new ActionListener() {
             
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                while(!solutionMoves.empty()){
-                    State newState = (State) solutionMoves.pop();
-                    canvas.setState(newState);
-                    aProblem.setCurrentState(newState);
-                    redraw();
-                }
-            }
-        });//end addActionListener
+		@Override
+		public void actionPerformed(ActionEvent e) {
+		    while(!solutionMoves.isEmpty()){
+			State newState = (State) aProblem.solutionMoves.pop();
+			canvas.setState(newState);
+			aProblem.setCurrentState(newState);
+			redraw();
+		    }
+		}
+	    });//end addActionListener
         
         JPanel resultsPanel = new JPanel();
         
-        String  stuff = "this is a long string. \n it contains several lines \n lalalalal\nlalalalala";
+        String  stuff = getStats();
         JTextArea solutionStats = new JTextArea(stuff);
+
         
         resultsPanel.add(showNext);
         resultsPanel.add(showAll);
@@ -154,13 +155,15 @@ public class GUI extends JComponent {
     /**
      * function to get the entire solution path for the problem.
      */
-    private void setSolutionMoves(){
-        Vertex parent = solution;
-        while(parent != null){
-            solutionMoves.push(parent);
-            parent = parent.getPredecessor();
-        }
-    }
+//    private void setSolutionMoves(){
+//        Vertex parent = solution;
+//        int i = 0;
+//        while(parent != null && i < 30){
+//            solutionMoves.push(parent.getPredecessor());
+//            parent = solution.getPredecessor();
+//            i++;
+//        }
+//    }
     
     private JComponent createIntro(String s){
         JTextArea introField = new JTextArea(s);
@@ -170,6 +173,10 @@ public class GUI extends JComponent {
         return introField;
     }
     
+    private String getStats(){
+        return "Num of Deque Ops: " + aProblem.getDequeOps() + "\nMax Deque Size: "+ 
+                aProblem.getMaxDequeSize();
+    }
     
     /**
      * @deprecated Use canvas instead
@@ -192,24 +199,24 @@ public class GUI extends JComponent {
         for(final Move move : aProblem.getMoves() ){
             final JButton but = new JButton(move.getMoveName());
             but.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent event){
-                    State newState = move.doMove(aProblem.getCurrentState());
+		    @Override
+		    public void actionPerformed(ActionEvent event){
+			State newState = move.doMove(aProblem.getCurrentState());
                     
-                    if(newState == null){
-                        JOptionPane.showMessageDialog(null, "Invalid Move");
-                    }
-                    else{
-                        canvas.setState(newState);
-                        aProblem.setCurrentState(newState);
-                        redraw();
-                        moveCount++;
-                        if(aProblem.success()){
-                            JOptionPane.showMessageDialog(null, "Congratulations! You have solved the problem in "+moveCount+" moves!");
-                        }
-                    }
-                }
-            });
+			if(newState == null){
+			    JOptionPane.showMessageDialog(null, "Invalid Move");
+			}
+			else{
+			    canvas.setState(newState);
+			    aProblem.setCurrentState(newState);
+			    redraw();
+			    moveCount++;
+			    if(aProblem.success()){
+				JOptionPane.showMessageDialog(null, "Congratulations! You have solved the problem in "+moveCount+" moves!");
+			    }
+			}
+		    }
+		});
             buttonList.add(but);
         }
         for(JButton button : buttonList){
@@ -221,7 +228,6 @@ public class GUI extends JComponent {
     
     private void initialization(){
         intro = aProblem.getIntroduction();
-        //currentState = aProblem.getCurrentState().toString();
     }
     
     private void resetProblem(){
@@ -246,5 +252,5 @@ public class GUI extends JComponent {
     private String currentState;
     private int moveCount;
     private Vertex solution;
-    private Stack<Vertex> solutionMoves;
+    private LinkedList<Vertex> solutionMoves;
 }
